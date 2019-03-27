@@ -53,10 +53,15 @@ describe('ProblemeComponent', () => {
   });
 
   it('Zone PRÉNOM valide avec 10 espaces', () => {
-    let errors = {};
-    let zone = component.problemeForm.get('prenom');
-    errors = zone.errors || {};
-    expect(errors['required']).toBeTruthy();
+    let zone = component.problemeForm.controls['prenom'];
+    zone.setValue(' '.repeat(10))
+    expect(zone.valid).toBeTruthy();
+  });
+
+  it('Zone PRÉNOM valide avec 2 espaces et 1 caractere', () => {
+    let zone = component.problemeForm.controls['prenom'];
+    zone.setValue('  a')
+    expect(zone.valid).toBeTruthy();
   });
 
 });
