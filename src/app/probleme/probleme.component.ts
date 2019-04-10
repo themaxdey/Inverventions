@@ -28,17 +28,20 @@ export class ProblemeComponent implements OnInit {
       courrielGroup: this.fb.group({
         courriel: [{value: '', disabled: true}],
         courrielConfirmation: [{value: '', disabled: true}],
-        telephone: [{value: '', disabled: true}], 
-      }), 
+      }),
+      telephone: [{value: '', disabled: true}],
+      notification: ['pasnotification']
     });
 
     this.problemes.obtenirProblemes()
     .subscribe(cat => this.typeProblemes = cat,
-               error => this.errorMessage = <any>error);      
+               error => this.errorMessage = <any>error);
+      
+               this.problemeForm.get('notification').valueChanges.subscribe(value => this.gestionNotifications(value));
   }
 
   gestionNotifications(typeNotification: String): void {
-    const telephone = this.problemeForm.get('courrielGroup.telephone');
+    const telephone = this.problemeForm.get('telephone');
     const courriel = this.problemeForm.get('courrielGroup.courriel');
     const courrielConfirmation = this.problemeForm.get('courrielGroup.courrielConfirmation');
     const courrielGroup = this.problemeForm.get('courrielGroup');
@@ -50,6 +53,16 @@ export class ProblemeComponent implements OnInit {
     courriel.clearValidators();
     courriel.reset();
     courriel.disable();
+
+    courrielConfirmation.clearValidators();
+    courrielConfirmation.reset();
+    courrielConfirmation.disable();
+
+    if(typeNotification == 'telephone'){
+
+      telephone.enable();
+      telephone.setValidators([Validators.required]);   
+    }
 
     if(typeNotification == 'courriel'){
 

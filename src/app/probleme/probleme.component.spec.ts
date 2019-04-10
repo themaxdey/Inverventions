@@ -74,14 +74,14 @@ describe('ProblemeComponent', () => {
   it(' Zone TELEPHONE est désactivée quand ne pas me notifier', () => { //wertyuiop;
     component.gestionNotifications('pasNotif');
 
-    let zone = component.problemeForm.get('courrielGroup.telephone');
+    let zone = component.problemeForm.get('telephone');
     expect(zone.status).toEqual('DISABLED');
   });
 
   it('Zone TELEPHONE est vide quand ne pas me notifier ', () => {
     component.gestionNotifications('pasNotif');
 
-    let zone = component.problemeForm.get('courrielGroup.telephone');
+    let zone = component.problemeForm.get('telephone');
     expect(zone.status).toEqual('DISABLED');
   });
 
@@ -102,7 +102,7 @@ describe('ProblemeComponent', () => {
   it('#19 | Zone TELEPHONE est désactivée quand notifier par courriel', () => {
     component.gestionNotifications('couriel');
 
-    let zone = component.problemeForm.get('courrielGroup.telephone');
+    let zone = component.problemeForm.get('telephone');
     expect(zone.status).toEqual('DISABLED');
   });
 
